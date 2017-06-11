@@ -5,6 +5,7 @@ import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.view.View
+import android.widget.Toast
 import com.github.satoshun.example.dagger.viewinjector.HasViewInjector
 import com.github.satoshun.example.dagger.viewinjector.R
 import dagger.android.AndroidInjection
@@ -13,7 +14,7 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(), HasSupportFragmentInjector, HasViewInjector {
+class MainActivity : AppCompatActivity(), HasSupportFragmentInjector, HasViewInjector, MainNavigator {
 
   @Inject lateinit var fragmentInjector: DispatchingAndroidInjector<Fragment>
   @Inject lateinit var viewInjector: DispatchingAndroidInjector<View>
@@ -45,4 +46,8 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector, HasViewInj
   override fun supportFragmentInjector(): AndroidInjector<Fragment> = fragmentInjector
 
   override fun viewInjector(): AndroidInjector<View> = viewInjector
+
+  override fun showToast() {
+    Toast.makeText(this, "CLICK TOAST", Toast.LENGTH_LONG).show()
+  }
 }
