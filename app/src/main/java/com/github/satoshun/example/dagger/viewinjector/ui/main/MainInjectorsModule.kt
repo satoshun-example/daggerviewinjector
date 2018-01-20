@@ -4,11 +4,7 @@ import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
 @Module
-abstract class MainInjectorsModule {
-
-  @ContributesAndroidInjector(modules = arrayOf(
-      BindMainActivity::class,
-      MainViewInjectorModule::class
-  ))
-  abstract fun contributesMainActivity(): MainActivity
+interface MainInjectorsModule {
+  @ContributesAndroidInjector(modules = [BindMainActivity::class, MainViewInjectorModule::class])
+  fun contributesMainActivity(): MainActivity
 }

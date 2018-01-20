@@ -14,10 +14,15 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(), HasSupportFragmentInjector, HasViewInjector, MainNavigator {
+class MainActivity : AppCompatActivity(),
+    HasSupportFragmentInjector,
+    HasViewInjector,
+    MainNavigator {
 
-  @Inject lateinit var fragmentInjector: DispatchingAndroidInjector<Fragment>
-  @Inject lateinit var viewInjector: DispatchingAndroidInjector<View>
+  @Inject
+  lateinit var fragmentInjector: DispatchingAndroidInjector<Fragment>
+  @Inject
+  lateinit var viewInjector: DispatchingAndroidInjector<View>
 
   private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
     when (item.itemId) {
@@ -35,10 +40,10 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector, HasViewInj
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    setContentView(R.layout.main_act)
     AndroidInjection.inject(this)
+    super.onCreate(savedInstanceState)
 
+    setContentView(R.layout.main_act)
     val navigation = findViewById(R.id.navigation) as BottomNavigationView
     navigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
   }

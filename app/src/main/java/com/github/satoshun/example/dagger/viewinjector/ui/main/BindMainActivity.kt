@@ -4,8 +4,7 @@ import dagger.Binds
 import dagger.Module
 
 @Module
-abstract class BindMainActivity {
-
+interface BindMainActivity {
   @Binds
-  abstract fun bindMainNavigator(activity: MainActivity): MainNavigator
+  fun bindMainNavigator(activity: MainActivity): MainNavigator
 }

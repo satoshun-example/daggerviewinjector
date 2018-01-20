@@ -7,13 +7,14 @@ import android.widget.RelativeLayout
 import com.github.satoshun.example.dagger.viewinjector.AndroidViewInjection
 import javax.inject.Inject
 
-class MainView(context: Context, attrs: AttributeSet?, defStyleAttr: Int)
-  : RelativeLayout(context, attrs, defStyleAttr) {
+class MainView @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : RelativeLayout(context, attrs, defStyleAttr) {
 
-  constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
-  constructor(context: Context) : this(context, null)
-
-  @Inject lateinit var navigator: MainNavigator
+  @Inject
+  lateinit var navigator: MainNavigator
 
   init {
     val button = Button(context)
@@ -25,7 +26,7 @@ class MainView(context: Context, attrs: AttributeSet?, defStyleAttr: Int)
   }
 
   override fun onAttachedToWindow() {
-    super.onAttachedToWindow()
     AndroidViewInjection.inject(this)
+    super.onAttachedToWindow()
   }
 }

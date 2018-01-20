@@ -8,14 +8,12 @@ import dagger.Subcomponent
 import dagger.android.AndroidInjector
 import dagger.multibindings.IntoMap
 
-@Module(subcomponents = arrayOf(MainViewInjectorModule.MainViewSubcomponent::class))
-abstract class MainViewInjectorModule {
-
+@Module(subcomponents = [MainViewInjectorModule.MainViewSubcomponent::class])
+interface MainViewInjectorModule {
   @Binds
   @IntoMap
   @ViewKey(MainView::class)
-  internal abstract fun bindAndroidInjectorFactory(builder: MainViewSubcomponent.Builder)
-      : AndroidInjector.Factory<out View>
+  fun bindAndroidInjectorFactory(builder: MainViewSubcomponent.Builder): AndroidInjector.Factory<out View>
 
   @Subcomponent
   interface MainViewSubcomponent : AndroidInjector<MainView> {
