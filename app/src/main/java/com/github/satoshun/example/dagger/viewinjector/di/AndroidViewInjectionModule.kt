@@ -6,8 +6,10 @@ import dagger.android.AndroidInjector
 import dagger.multibindings.Multibinds
 
 @Module
-abstract class AndroidViewInjectionModule {
+interface AndroidViewInjectionModule {
+  @Multibinds
+  fun viewInjectorFactories(): Map<Class<out View>, AndroidInjector.Factory<out View>>
 
   @Multibinds
-  abstract fun viewInjectorFactories(): Map<Class<out View>, AndroidInjector.Factory<out View>>
+  fun viewInjectorFactoriesWithStringKeys(): Map<String, AndroidInjector.Factory<out View>>
 }
